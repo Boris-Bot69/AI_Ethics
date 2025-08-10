@@ -35,24 +35,10 @@ To run this application on your local machine, follow these steps.
 
 3.  **Run the Streamlit app**
     ```bash
-    streamlit run your_app.py
+    streamlit run app.py
     ```
     The application will open in your web browser, typically at `http://localhost:8501`.
 
----
-
-## 📁 File Structure
 
 
-your-project-folder/
-├── your_app.py         # Main Streamlit application
-├── requirements.txt    # Python dependencies
-└── images/             # Folder for all image assets
-└── README.md           # Project documentation
 
-
----
-
-## 📄 License
-
-This project is open source and available under the MIT License.
