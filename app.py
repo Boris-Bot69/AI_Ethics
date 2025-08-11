@@ -28,10 +28,42 @@ def load_css():
         background-color: #ffffff;
     }
 
-    /* Remove Streamlit default padding and margins from the main container */
-    .main .block-container {
+    /* --- START: DEFINITIVE EDGE-TO-EDGE LAYOUT FIX --- */
+
+    /* 1. Force the main container to be full-width with no padding */
+    .block-container {
         padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
     }
+
+    /* 2. Remove the default gap between columns */
+    div[data-testid="stHorizontalBlock"] {
+        gap: 0 !important;
+    }
+
+    /* 3. Add padding back ONLY to the central content column */
+    div[data-testid="stHorizontalBlock"] > div:nth-child(2) {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* --- END: DEFINITIVE EDGE-TO-EDGE LAYOUT FIX --- */
+
+
+    /* --- START: SIDEBAR IMAGE SIZE FIX --- */
+
+    /* Constrain the height of images in the first and last columns */
+    div[data-testid="stHorizontalBlock"] > div:first-child img,
+    div[data-testid="stHorizontalBlock"] > div:last-child img {
+        max-height: 1600px; /* Adjust this value to make images taller or shorter */
+        max-width: 100%;
+        width: auto;       /* Maintain aspect ratio */
+        margin: 0 auto;    /* Center the image horizontally */
+    }
+
+    /* --- END: SIDEBAR IMAGE SIZE FIX --- */
+
 
     /* Add padding to the top of the body to prevent content from being hidden behind the fixed navbar */
     body {
@@ -86,8 +118,8 @@ def load_css():
 
     .nav-link:hover {
         text-decoration: none !important;
-        color: #333;
-        background-color: rgba(255, 255, 255, 0.2);
+        color: #FFFFFF !important;
+        background-color: #779977;
         border-radius: 4px;
     }
 
@@ -121,17 +153,6 @@ def load_css():
         z-index: 9; /* Place just below the navbar */
     }
 
-    /* CSS to make images in columns align to the very edge */
-    /* This targets the div that wraps the columns and removes the gap */
-    .st-emotion-cache-1xw8zd6 {
-        gap: 0 !important;
-    }
-
-    /* Add padding to the central content column */
-    div[data-testid="stHorizontalBlock"] > div:nth-child(2) {
-        padding: 0 1rem !important;
-    }
-
     /* Custom styles for the text content */
     .custom-header {
         font-family: 'Inter', sans-serif;
@@ -153,7 +174,7 @@ def load_css():
         color: #000000; /* Black */
         letter-spacing: 0;
     }
-    
+
     /* Styles for Publications Section */
     .publications-title {
         display: inline-block;
@@ -183,6 +204,10 @@ def load_css():
 
     .image-spacer1 {
         height: 6rem; /* Adjusted for better spacing */
+    }
+
+    button[data-testid="StyledFullScreenButton"] {
+        display: none !important;
     }
 
     /* New styles for the custom bullet list */
@@ -247,7 +272,7 @@ def load_css():
         line-height: 1.6;
         color: #333;
     }
-    
+
     .oecd-section-title {
         font-family: 'Inter', sans-serif;
         font-weight: 600;
@@ -258,24 +283,24 @@ def load_css():
         background-color: #f7f7f7;
         border-left: 5px solid #A0C3A0;
     }
-    
+
     .oecd-item {
         text-align: center;
         margin-bottom: 3rem;
     }
-    
+
     .oecd-item img {
         max-width: 150px;
         margin-bottom: 1rem;
     }
-    
+
     .oecd-item h3 {
         font-family: 'Inter', sans-serif;
         font-weight: 600;
         font-size: 20px;
         margin-bottom: 0.5rem;
     }
-    
+
     .oecd-item p {
         font-family: 'Inter', sans-serif;
         font-size: 16px;
@@ -324,7 +349,8 @@ def create_navigation():
     st.markdown("""
     <div class="navbar">
         <div class="nav-links">
-            <span class="nav-link active">Home</span>
+            <span class="nav-divider"></span>
+            <a href="app.py" class="nav-link" target="_self">TUM AI Ethics literacy activities</a>
             <span class="nav-divider"></span>
             <a href="ai_ethics_activities.py" class="nav-link" target="_self">AI Ethics Activities</a>
             <span class="nav-divider"></span>
@@ -356,8 +382,8 @@ def main():
 
     with sidebar_left:
         # All content for the left sidebar. It will extend down the page.
-        st.image('images/leftside_picture.png', use_container_width=True)
-        st.image('images/leftside_down_picture.png', use_container_width=True)
+        st.image('images/leftsidebar.svg', use_container_width=True)
+        st.image('images/leftsidebar_down.svg', use_container_width=True)
 
     with main_content:
         # This is the main central column.
@@ -473,8 +499,8 @@ def main():
 
     with sidebar_right:
         # All content for the right sidebar. It will extend down the page.
-        st.image('images/rightside_picture.png', use_container_width=True)
-        st.image('images/rightside_down_picture.png', use_container_width=True)
+        st.image('images/rightsidebar.svg', use_container_width=True)
+        st.image('images/rightsidebar_down.svg', use_container_width=True)
 
 
 if __name__ == "__main__":
